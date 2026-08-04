@@ -222,12 +222,14 @@ def list_remote_datasets(
 
         if latest_version:
             namespace, dataset_name, version = parse_dataset_id(dataset_id)
-            old_version = max_version[namespace].get(dataset_name, version)
-            max_version[namespace][dataset_name] = max(old_version, version)
-            if old_version != max_version[namespace][dataset_name]:
-                min_id = gen_dataset_id(
-                    namespace, dataset_name, min(old_version, version)
-                )
-                del remote_datasets[min_id]
+            prev_version = max_version[namespace].get(dataset_name)
+            if prev_version is None or version > prev_version:
+                if prev_version is not None:
+                    del remote_datasets[
+                        gen_dataset_id(namespace, dataset_name, prev_version)
+                    ]
+                max_version[namespace][dataset_name] = version
+            elif version < prev_version:
+                del remote_datasets[dataset_id]
 
     return remote_datasets
