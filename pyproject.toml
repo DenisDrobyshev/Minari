@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 name = "minari"
 description = "A standard format for offline reinforcement learning datasets, with popular reference datasets and related utilities."
 readme = "README.md"
-requires-python = ">= 3.8"
+requires-python = ">= 3.11"
 authors = [{ name = "Farama Foundation", email = "contact@farama.org" }]
 license = { text = "MIT License" }
 keywords = ["Reinforcement Learning", "Offline RL", "RL", "AI", "Gymnasium", "Farama"]
